@@ -1,6 +1,6 @@
 
 /*Author: Andrew McKernan
-*CS385 HW 2
+* CS385 HW 2
 *  2/9/22
 * Summary: initializes canvas, creates a cone object, and renders it
 */
@@ -15,7 +15,7 @@ function init() {
     }
 
     gl.clearColor(0, 0, 0, .5);
-    let cone = new Cone(gl, 300);
+    let cone = new Cone(gl, 100);
     render();
 }
 window.onload = init;
