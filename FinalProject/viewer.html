@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<style>
+    table, th, td {
+        border: 1px solid black;
+
+    }
+</style>
+<head>
+    <script type="text/javascript" src="initShaders.js"></script>
+    <script type="text/javascript" src="Cube.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="MV.js"></script>
+    <script type="text/javascript" src="Sphere.js"></script>
+
+
+    <script id="Cube-vertex-shader" type="x-shader/x-vertex">#version 300 es
+        in vec4 aPosition;
+        uniform mat4 MV;
+        uniform mat4 P;
+        uniform mat4 V;
+        out vec2  vTexCoord;
+
+        void main()
+        {
+            vTexCoord = 0.5 *  (aPosition.xy + vec2(1));
+            gl_Position =  MV * aPosition;
+            gl_PointSize = 3.0;
+
+        }
+    </script>
+
+    <script id="Cube-fragment-shader" type="x-shader/x-fragment">#version 300 es
+        precision highp float;
+
+        in  vec2 vTexCoord;
+        out vec4 fColor;
+        void main()
+        {
+
+            int xPos = int( vTexCoord.x  * 250.0);
+            int yPos = int( vTexCoord.y  * 250.0);
+
+
+            if( xPos % 50 == 0 ||  yPos  % 50 == 0 )
+            {
+
+             fColor = vec4(1,1,1,1);
+
+            }
+            else
+            {
+              fColor = vec4(.69,.68,.68,1);
+            }
+        }
+    </script>
+
+    <script id="Sphere-vertex-shader" type="x-shader/x-vertex">
+    in  vec4 aPosition;
+
+    uniform mat4 P;
+    uniform mat4 MV;
+
+    void main()
+    {
+        gl_PointSize = 3.0;
+        gl_Position = P * MV * aPosition;
+    }
+    </script>
+        <script id="Sphere-fragment-shader" type="x-shader/x-fragment">
+        out vec4 fColor;
+
+        uniform vec4  color;
+
+        void main()
+        {
+            fColor = color;
+        }
+    </script>
+</head>
+
+<body>
+<canvas id="webgl-canvas" width="720" height="720"></canvas>
+<input type="file" name="file" id="file" />
+
+
+<table  width=720">
+    <tr>
+        <td width="140">
+            ACC
+        </td>
+        <td width="100">
+            HR
+        </td>
+        <td width="100">
+            TEMP
+        </td>
+        <td width="100">
+            EDA
+        </td>
+        <td width="180">
+            IDI
+        </td>
+        <td width="100">
+            BVP
+        </td>
+    </tr>
+    <tr>
+        <td id = "accData" width="140">
+            0
+        </td>
+        <td id = "hrData" width="100">
+            1
+        </td>
+        <td id ="tempData" width="100">
+            2
+        </td>
+        <td id ="edaData" width="100">
+            3
+        </td>
+        <td id = "idiData" width="180">
+            4
+        </td>
+        <td id = "bvpData" width="10">
+            5
+        </td>
+
+    </tr>
+</table>
+
+
+
+
+</body>
